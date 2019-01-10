@@ -1,7 +1,7 @@
 import styled from 'vue-styled-components'
 
 import { Cell, Header } from '../../atoms'
-import { Row, Controls } from '../../molecules'
+import { Row, Controls, Footer, ScreenLocker } from '../../molecules'
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,6 +10,7 @@ const Wrapper = styled.div`
 
 const RowsWrapper = styled.div`
   display: inline-block;
+  position: relative;
 `
 
 export const GameBoard = {
@@ -23,12 +24,25 @@ export const GameBoard = {
       type: Function,
       required: true,
     },
+    level: {
+      type: Number,
+      required: true,
+    },
+    score: {
+      type: Number,
+      required: true,
+    },
+    stage: {
+      type: String,
+      required: true,
+    },
   },
   render() {
     return (
       <Wrapper>
-        <Header>Snake</Header>
+        <Header>Snake Game</Header>
         <RowsWrapper>
+          <ScreenLocker stage={this.stage} />
           {this.board.map((row, y) => (
             <Row key={`row-${y}`}>
               {row.map((cell, x) => (
@@ -37,6 +51,7 @@ export const GameBoard = {
             </Row>
           ))}
         </RowsWrapper>
+        <Footer level={this.level} score={this.score} />
         <Controls clickButton={this.clickButton} />
       </Wrapper>
     )

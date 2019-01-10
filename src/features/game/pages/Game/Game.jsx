@@ -33,6 +33,9 @@ export const Game = {
     stage() {
       return this.$store.state.game.stage
     },
+    score() {
+      return this.$store.state.game.score
+    },
   },
   methods: {
     ...mapActions([START_GAME, TICK, CLICK_BUTTON]),
@@ -40,7 +43,13 @@ export const Game = {
   render() {
     return (
       <Main>
-        <GameBoard board={this.board} clickButton={this[CLICK_BUTTON]} />
+        <GameBoard
+          board={this.board}
+          clickButton={this[CLICK_BUTTON]}
+          level={this.level}
+          score={this.score}
+          stage={this.stage}
+        />
       </Main>
     )
   },
