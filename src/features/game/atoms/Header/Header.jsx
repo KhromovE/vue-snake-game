@@ -1,9 +1,10 @@
 import styled from 'vue-styled-components'
 
 export const Header = styled.header`
+  font-size: 20px;
   text-align: center;
-  padding: 8px 0;
-  background-color: #f9f9fb;
+  padding: 12px 0;
+  background-color: var(--bg-additional-block);
   border-left: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
   border-top: 1px solid var(--border-color);

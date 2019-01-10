@@ -9,7 +9,7 @@ export const game = {
     food: {},
     level: 1,
     height: 20,
-    width: 20,
+    width: 23,
     stage: GAME_STAGES.CREATED,
     direction: DIRECTIONS.UP,
     score: 0,

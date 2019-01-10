@@ -9,6 +9,7 @@ injectGlobal`
 		--bg-snake-cell: #8ac858;
 		--bg-food-cell: #fd5d47;
 		--border-color: #e9e9e9;
+		--bg-additional-block: #f9f9fb;
 
 		--border-radius: 5px;
 	}

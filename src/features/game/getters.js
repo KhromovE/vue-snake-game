@@ -8,9 +8,9 @@ import { isUndefined } from '~/lib/utils'
  * @return {Array.<Array.<number>>}
  */
 const createEmptyBoard = (height, width) =>
-  Array(width)
+  Array(height)
     .fill()
-    .map(() => Array(height).fill(CELL_FILLEES.EMPTY_CELL))
+    .map(() => Array(width).fill(CELL_FILLEES.EMPTY_CELL))
 
 /**
  * Fill a matrix cells with snake coords

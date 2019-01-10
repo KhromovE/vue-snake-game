@@ -101,14 +101,13 @@ export const actions = {
     if (collision) {
       commit(CHANGE_STAGE, { stage: GAME_STAGES.GAME_OVER })
     } else {
-      const ateFood = eatsFood(nextCoord, food)
-      const offset = ateFood ? 0 : 1
+      const eatingFoo = eatsFood(nextCoord, food)
+      const offset = eatingFoo ? 0 : 1
       const newSnake = [nextCoord, ...snake.slice(0, snake.length - offset)]
 
       commit(MOVE_SNAKE, { snake: newSnake, nextCoord })
-      if (ateFood) {
+      if (eatingFoo) {
         commit(SET_FOOD, { food: generateFoodCoord(snake, height, width) })
-        console.log(score)
         commit(CHANGE_SCORE, { score: score + 1 })
       }
     }
