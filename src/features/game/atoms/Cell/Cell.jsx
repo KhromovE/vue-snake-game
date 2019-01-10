@@ -1,12 +1,12 @@
 import styled from 'vue-styled-components'
 
 import { CELL_SIZE } from '~/config'
-import { CELL_FILLEES } from '../../constants'
+import { CELL_FILLERS } from '../../constants'
 
 const colorMap = {
-  [CELL_FILLEES.EMPTY_CELL]: 'white',
-  [CELL_FILLEES.SNAKE_CELL]: 'var(--bg-snake-cell)',
-  [CELL_FILLEES.FOOD_CELL]: 'var(--bg-food-cell)',
+  [CELL_FILLERS.EMPTY_CELL]: 'white',
+  [CELL_FILLERS.SNAKE_CELL]: 'var(--bg-snake-cell)',
+  [CELL_FILLERS.FOOD_CELL]: 'var(--bg-food-cell)',
 }
 
 export const Cell = styled('section', { type: Number })`

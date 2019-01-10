@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue'
 import styled from 'vue-styled-components'
 
 import { Cell } from './Cell'
-import { CELL_FILLEES } from '../../constants'
+import { CELL_FILLERS } from '../../constants'
 
 const Wrapper = styled.div`
   height: 90px;
@@ -18,7 +18,7 @@ storiesOf('Cell', module)
     render() {
       return (
         <Wrapper>
-          <Cell type={CELL_FILLEES.SNAKE_CELL} />
+          <Cell type={CELL_FILLERS.SNAKE_CELL} />
         </Wrapper>
       )
     },
@@ -27,7 +27,7 @@ storiesOf('Cell', module)
     render() {
       return (
         <Wrapper>
-          <Cell type={CELL_FILLEES.FOOD_CELL} />
+          <Cell type={CELL_FILLERS.FOOD_CELL} />
         </Wrapper>
       )
     },
@@ -36,7 +36,7 @@ storiesOf('Cell', module)
     render() {
       return (
         <Wrapper>
-          <Cell type={CELL_FILLEES.EMPTY_CELL} />
+          <Cell type={CELL_FILLERS.EMPTY_CELL} />
         </Wrapper>
       )
     },

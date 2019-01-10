@@ -1,4 +1,4 @@
-import { CELL_FILLEES, DIRECTIONS } from './constants'
+import { CELL_FILLERS, DIRECTIONS } from './constants'
 import { isUndefined } from '~/lib/utils'
 
 /**
@@ -10,7 +10,7 @@ import { isUndefined } from '~/lib/utils'
 const createEmptyBoard = (height, width) =>
   Array(height)
     .fill()
-    .map(() => Array(width).fill(CELL_FILLEES.EMPTY_CELL))
+    .map(() => Array(width).fill(CELL_FILLERS.EMPTY_CELL))
 
 /**
  * Fill a matrix cells with snake coords
@@ -20,7 +20,7 @@ const createEmptyBoard = (height, width) =>
  */
 const addSnakeToBoard = (board, snake) => {
   snake.forEach(({ y, x }) => {
-    board[y][x] = CELL_FILLEES.SNAKE_CELL
+    board[y][x] = CELL_FILLERS.SNAKE_CELL
   })
 
   return board
@@ -35,7 +35,7 @@ const addSnakeToBoard = (board, snake) => {
  */
 const addFoodToBoard = (board, { y, x }) => {
   if (!isUndefined(y) && !isUndefined(x)) {
-    board[y][x] = CELL_FILLEES.FOOD_CELL
+    board[y][x] = CELL_FILLERS.FOOD_CELL
   }
 
   return board

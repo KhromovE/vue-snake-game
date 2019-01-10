@@ -8,7 +8,7 @@ export const GAME_STAGES = {
 }
 
 // cell fillers
-export const CELL_FILLEES = {
+export const CELL_FILLERS = {
   EMPTY_CELL: 0,
   SNAKE_CELL: 1,
   FOOD_CELL: 2,
