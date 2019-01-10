@@ -2,23 +2,14 @@ import { mapActions } from 'vuex'
 
 import { Main } from '~/features/shared'
 import { GameBoard } from '../../organisms'
-import { DEFAULT_SPEED } from '~/config'
+import { DEFAULT_SPEED, SPEED_STEP } from '~/config'
 import { GAME_STAGES } from '../../constants'
-import { START_GAME, TICK, CLICK_BUTTON } from '../../actions'
+import { TICK, CLICK_BUTTON } from '../../actions'
 
 export const Game = {
   name: 'Game',
-  created() {
-    if (this.stage === GAME_STAGES.CREATED) {
-      this[START_GAME]()
-    }
-  },
   mounted() {
-    this.tick = setInterval(() => {
-      if (this.stage === GAME_STAGES.STARTED) {
-        this[TICK]()
-      }
-    }, DEFAULT_SPEED / this.level)
+    this.setTick(this.level)
   },
   destroyed() {
     clearInterval(this.tick)
@@ -28,6 +19,8 @@ export const Game = {
       return this.$store.getters.createBoard
     },
     level() {
+      const { level } = this.$store.state.game
+      this.setTick(level)
       return this.$store.state.game.level
     },
     stage() {
@@ -38,7 +31,15 @@ export const Game = {
     },
   },
   methods: {
-    ...mapActions([START_GAME, TICK, CLICK_BUTTON]),
+    ...mapActions([TICK, CLICK_BUTTON]),
+    setTick(level) {
+      clearInterval(this.tick)
+      this.tick = setInterval(() => {
+        if (this.stage === GAME_STAGES.STARTED) {
+          this[TICK]()
+        }
+      }, DEFAULT_SPEED - SPEED_STEP * level)
+    },
   },
   render() {
     return (

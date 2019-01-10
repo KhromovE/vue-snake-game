@@ -5,7 +5,7 @@ import { actions } from './actions'
 
 export const game = {
   state: {
-    snake: [{ x: 1, y: 1 }, { x: 1, y: 2 }],
+    snake: [],
     food: {},
     level: 1,
     height: 20,

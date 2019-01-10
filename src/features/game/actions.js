@@ -4,6 +4,8 @@ import {
   CHANGE_DIRECTION,
   SET_FOOD,
   CHANGE_SCORE,
+  SET_SNAKE,
+  CHANGE_LEVEL,
 } from './mutations'
 import { GAME_STAGES, CONTROLS, DIRECTIONS } from './constants'
 
@@ -90,12 +92,16 @@ const checkCorrectDirection = (snake, direction, height, width) => {
 export const actions = {
   [START_GAME]({ commit, state }) {
     const { snake, height, width } = state
-    commit(CHANGE_STAGE, { stage: GAME_STAGES.STARTED })
+    commit(CHANGE_SCORE, { score: 0 })
+    commit(CHANGE_LEVEL, { level: 1 })
+    commit(CHANGE_DIRECTION, { direction: DIRECTIONS.UP })
+    commit(SET_SNAKE)
     commit(SET_FOOD, { food: generateFoodCoord(snake, height, width) })
+    commit(CHANGE_STAGE, { stage: GAME_STAGES.STARTED })
   },
   [TICK]({ commit, getters, state }) {
     const nextCoord = getters.getNextCoord
-    const { snake, food, height, width, score } = state
+    const { snake, food, height, width, score, level } = state
     const collision = checkCollision(snake, nextCoord)
 
     if (collision) {
@@ -107,12 +113,18 @@ export const actions = {
 
       commit(MOVE_SNAKE, { snake: newSnake, nextCoord })
       if (eatingFoo) {
+        const newScore = score + 1
+
         commit(SET_FOOD, { food: generateFoodCoord(snake, height, width) })
-        commit(CHANGE_SCORE, { score: score + 1 })
+        commit(CHANGE_SCORE, { score: newScore })
+
+        if (newScore % 10 === 0) {
+          commit(CHANGE_LEVEL, { level: level + 1 })
+        }
       }
     }
   },
-  [CLICK_BUTTON]({ commit, state }, { keyCode }) {
+  [CLICK_BUTTON]({ commit, state, dispatch }, { keyCode }) {
     const { stage, snake, height, width } = state
 
     switch (keyCode) {
@@ -145,7 +157,13 @@ export const actions = {
         break
 
       case CONTROLS.SPANCE:
-        if (stage === GAME_STAGES.PAUSED) {
+        if (
+          stage === GAME_STAGES.CREATED ||
+          stage === GAME_STAGES.GAME_OVER ||
+          stage === GAME_STAGES.WON
+        ) {
+          dispatch(START_GAME)
+        } else if (stage === GAME_STAGES.PAUSED) {
           commit(CHANGE_STAGE, { stage: GAME_STAGES.STARTED })
         } else if (stage === GAME_STAGES.STARTED) {
           commit(CHANGE_STAGE, { stage: GAME_STAGES.PAUSED })
