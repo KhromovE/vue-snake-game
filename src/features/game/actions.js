@@ -8,6 +8,7 @@ import {
   CHANGE_LEVEL,
 } from './mutations'
 import { GAME_STAGES, CONTROLS, DIRECTIONS } from './constants'
+import { LEVEL_STEP } from '~/config'
 
 export const START_GAME = 'START_GAME'
 export const TICK = 'TICK'
@@ -20,6 +21,7 @@ const checkCollision = (snake, nextCoord) =>
  * Check if the snake ate the food
  * @param  {Object} nextCoord
  * @param  {Object} food
+ * @return {boolean}
  */
 const eatsFood = (nextCoord, food) =>
   nextCoord.x === food.x && nextCoord.y === food.y
@@ -118,7 +120,7 @@ export const actions = {
         commit(SET_FOOD, { food: generateFoodCoord(snake, height, width) })
         commit(CHANGE_SCORE, { score: newScore })
 
-        if (newScore % 10 === 0) {
+        if (newScore % LEVEL_STEP === 0) {
           commit(CHANGE_LEVEL, { level: level + 1 })
         }
       }
