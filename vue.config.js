@@ -7,4 +7,8 @@ module.exports = {
       },
     },
   },
+  baseUrl:
+    process.env.NODE_ENV === 'production'
+      ? '/vue-snake-game/'
+      : 'http://localhost:8080',
 }
