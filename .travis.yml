@@ -7,10 +7,10 @@ cache:
     - node_modules
 
 before_script:
-  - yarn
+  - npm install
 
 script:
-  - yarn run build
+  - npm run build
 
 deploy:
   provider: pages
