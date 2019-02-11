@@ -33,6 +33,9 @@ const eatsFood = (nextCoord, food) =>
  */
 const generateRandomNumber = value => Math.floor(Math.random() * value)
 
+const compareCoords = (first, second) =>
+  first.x === second.x && first.y === second.y
+
 /**
  * Generate a new food coords
  * @param  {Array.<{x: number, y: number}>} snake
@@ -41,19 +44,22 @@ const generateRandomNumber = value => Math.floor(Math.random() * value)
  * @return {{x: number, y: number}}
  */
 const generateFoodCoord = (snake, height, width) => {
-  let x, y
-  let invalid = true
+  let board = []
 
-  while (invalid) {
-    x = generateRandomNumber(width)
-    y = generateRandomNumber(height)
-    invalid = snake.some(section => section.x === x && section.y === y)
+  for (let x = 0; x < width; x += 1) {
+    for (let y = 0; y < height; y += 1) {
+      const nextCoord = { x, y }
+
+      if (!snake.some(snakeCoord => compareCoords(snakeCoord, nextCoord))) {
+        board.push(nextCoord)
+      }
+    }
   }
 
-  return {
-    x,
-    y,
-  }
+  const randomIndex = generateRandomNumber(board.length)
+  const randomCoords = board[randomIndex]
+
+  return randomCoords
 }
 
 /**
