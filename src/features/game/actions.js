@@ -18,21 +18,18 @@ const checkCollision = (snake, nextCoord) =>
   snake.some(({ x, y }) => nextCoord.x === x && nextCoord.y === y)
 
 /**
- * Check if the snake ate the food
- * @param  {Object} nextCoord
- * @param  {Object} food
- * @return {boolean}
- */
-const eatsFood = (nextCoord, food) =>
-  nextCoord.x === food.x && nextCoord.y === food.y
-
-/**
  * Generate a random number
  * @param  {number} value
  * @return {number}
  */
 const generateRandomNumber = value => Math.floor(Math.random() * value)
 
+/**
+ * Compare two coords
+ * @param  {Object} first coord
+ * @param  {Object} second coord
+ * @return {boolean}
+ */
 const compareCoords = (first, second) =>
   first.x === second.x && first.y === second.y
 
@@ -115,7 +112,7 @@ export const actions = {
     if (collision) {
       commit(CHANGE_STAGE, { stage: GAME_STAGES.GAME_OVER })
     } else {
-      const eatingFoo = eatsFood(nextCoord, food)
+      const eatingFoo = compareCoords(nextCoord, food)
       const offset = eatingFoo ? 0 : 1
       const newSnake = [nextCoord, ...snake.slice(0, snake.length - offset)]
 
