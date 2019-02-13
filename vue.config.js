@@ -8,7 +8,9 @@ module.exports = {
     },
   },
   baseUrl:
-    process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080',
+    process.env.NODE_ENV === 'production'
+      ? '/vue-snake-game'
+      : 'http://localhost:8080',
   // pwa: {
   //   workboxPluginMode: 'InjectManifest',
   //   workboxOptions: {
